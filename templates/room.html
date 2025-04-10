@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="main-container">
+    <div id="meeting-room-container" class="meeting-container" data-username="{{ username }}" data-room-id="{{ room_id }}">
+        <!-- Video Container -->
+        <div class="video-container">
+            <!-- Video Area -->
+            <div class="videos-area">
+                <!-- Remote Videos Grid -->
+                <div id="remote-videos"></div>
+                
+                <!-- Local Video -->
+                <div class="local-video-container">
+                    <video id="local-video" autoplay muted playsinline></video>
+                </div>
+                
+                <!-- Recording Timer -->
+                <div id="recording-timer">00:00</div>
+            </div>
+            
+            <!-- Whiteboard (initially hidden) -->
+            <div id="whiteboard">
+                <canvas id="whiteboard-canvas"></canvas>
+                
+                <div class="whiteboard-controls">
+                    <div class="whiteboard-tools">
+                        <button class="drawing-tool active" data-tool="pencil" title="Pencil">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="drawing-tool" data-tool="brush" title="Brush">
+                            <i class="fas fa-paint-brush"></i>
+                        </button>
+                        <button class="drawing-tool" data-tool="eraser" title="Eraser">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <button class="drawing-tool" data-tool="text" title="Text">
+                            <i class="fas fa-font"></i>
+                        </button>
+                        <button class="drawing-tool" data-tool="select" title="Select">
+                            <i class="fas fa-mouse-pointer"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="color-size-controls">
+                        <input type="color" id="color-picker" value="#000000" title="Color">
+                        <input type="range" id="brush-size" min="1" max="50" value="5" title="Brush Size">
+                        <button id="clear-whiteboard" class="btn btn-sm btn-outline-danger" title="Clear Whiteboard">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controls Bar -->
+            <div class="controls-bar">
+                <button id="audio-btn" class="btn btn-primary" title="Mute/Unmute">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                
+                <button id="video-btn" class="btn btn-primary" title="Start/Stop Video">
+                    <i class="fas fa-video"></i>
+                </button>
+                
+                <button id="screen-share-btn" class="btn btn-primary" title="Share Screen">
+                    <i class="fas fa-desktop"></i> Share Screen
+                </button>
+                
+                <button id="whiteboard-btn" class="btn btn-primary" title="Show/Hide Whiteboard">
+                    <i class="fas fa-chalkboard"></i> Show Whiteboard
+                </button>
+                
+                <button id="save-whiteboard-btn" class="btn btn-primary" title="Save Whiteboard">
+                    <i class="fas fa-save"></i>
+                </button>
+                
+                <button id="record-btn" class="btn btn-primary" title="Start/Stop Recording">
+                    <i class="fas fa-record-vinyl"></i> Start Recording
+                </button>
+                
+                <button id="toggle-chat-btn" class="btn btn-primary" title="Toggle Chat">
+                    <i class="fas fa-comment-slash"></i>
+                </button>
+                
+                <button id="toggle-participants-btn" class="btn btn-primary" title="Toggle Participants">
+                    <i class="fas fa-users"></i>
+                </button>
+                
+                <button id="leave-btn" class="btn btn-danger leave-btn" title="Leave Meeting">
+                    <i class="fas fa-phone-slash"></i> Leave
+                </button>
+            </div>
+        </div>
+        
+        <!-- Chat Panel -->
+        <div id="chat-panel" class="side-panel">
+            <div class="chat-header">
+                <h5><i class="fas fa-comments"></i> Chat</h5>
+            </div>
+            
+            <div id="chat-messages" class="chat-messages">
+                <!-- Chat messages will be added here dynamically -->
+                <div class="chat-message">
+                    <div class="message-header">
+                        <span class="message-sender">System</span>
+                        <span class="message-time">Now</span>
+                    </div>
+                    <div class="message-body">
+                        Welcome to the meeting! You can chat with other participants here.
+                    </div>
+                </div>
+            </div>
+            
+            <form id="chat-form" class="chat-form">
+                <div class="input-group">
+                    <input type="text" id="message-input" class="form-control" placeholder="Type a message..." required>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Participants Panel -->
+        <div id="participants-panel" class="side-panel">
+            <div class="participants-header">
+                <h5><i class="fas fa-users"></i> Participants</h5>
+            </div>
+            
+            <ul id="participants-list" class="list-group participants-list">
+                <!-- Participants will be added here dynamically -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ username }} (You)
+                    <span class="badge bg-success rounded-pill">online</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Socket.IO Functionality -->
+<script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+
+<!-- WebRTC Functionality -->
+<script src="{{ url_for('static', filename='js/webrtc.js') }}"></script>
+
+<!-- Whiteboard Functionality -->
+<script src="{{ url_for('static', filename='js/whiteboard.js') }}"></script>
+
+<!-- Recording Functionality -->
+<script src="{{ url_for('static', filename='js/recording.js') }}"></script>
+
+<!-- Main JavaScript -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

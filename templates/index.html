@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h1 class="card-title text-center mb-4">Welcome to MeetSync</h1>
+                    
+                    <p class="lead text-center mb-4">
+                        A secure meeting platform with screen sharing, whiteboard, and recording capabilities.
+                    </p>
+                    
+                    {% if error %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-plus-circle text-primary"></i> 
+                                        Create New Meeting
+                                    </h5>
+                                    <p class="card-text">Start a new meeting and invite others to join.</p>
+                                    
+                                    <form action="{{ url_for('create_room') }}" method="post">
+                                        <div class="mb-3">
+                                            <label for="create-username" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="create-username" name="username" required placeholder="Enter your name">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-video"></i> Create Meeting
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-sign-in-alt text-success"></i> 
+                                        Join Existing Meeting
+                                    </h5>
+                                    <p class="card-text">Join a meeting using a meeting code.</p>
+                                    
+                                    <form action="{{ url_for('join_existing_room') }}" method="post">
+                                        <div class="mb-3">
+                                            <label for="join-username" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="join-username" name="username" required placeholder="Enter your name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="room-id" class="form-label">Meeting Code</label>
+                                            <input type="text" class="form-control" id="room-id" name="room_id" required placeholder="Enter meeting code">
+                                        </div>
+                                        <button type="submit" class="btn btn-success w-100">
+                                            <i class="fas fa-sign-in-alt"></i> Join Meeting
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Key Features</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-desktop text-primary fs-4 me-2"></i>
+                                        <span>Screen Sharing</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-chalkboard text-primary fs-4 me-2"></i>
+                                        <span>Interactive Whiteboard</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-record-vinyl text-primary fs-4 me-2"></i>
+                                        <span>Screen Recording</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-comments text-primary fs-4 me-2"></i>
+                                        <span>Chat Functionality</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-moon text-primary fs-4 me-2"></i>
+                                        <span>Dark Mode</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-lock text-primary fs-4 me-2"></i>
+                                        <span>Secure Meetings</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer mt-5 mb-4 text-center text-muted">
+    <div class="container">
+        <p>© 2023 MeetSync - All rights reserved</p>
+    </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
