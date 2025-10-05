@@ -48,7 +48,8 @@ function initializeWhiteboard() {
     
     // Set up drawing mode buttons
     document.querySelectorAll('.drawing-tool').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function(e) 
+        {
             const mode = e.currentTarget.getAttribute('data-tool');
             setDrawingMode(mode);
             
@@ -71,6 +72,12 @@ function initializeWhiteboard() {
     // Hide the whiteboard initially
     toggleWhiteboard(false);
 }
+
+//close button
+document.getElementById('close-whiteboard-btn').addEventListener('click', () => {
+    toggleWhiteboard(false);
+});
+
 
 // Resize canvas on window resize
 function resizeCanvas() {
@@ -132,7 +139,7 @@ function setDrawingMode(mode) {
 
 // Add text to the canvas
 function addTextToCanvas() {
-    const text = new fabric.IText('Type here', {
+    const text = new fabric.IText("type here" ,{
         left: canvas.width / 2,
         top: canvas.height / 2,
         fill: currentColor,
@@ -220,4 +227,9 @@ function saveWhiteboardAsImage() {
     link.href = dataURL;
     link.download = `whiteboard-${new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-')}.png`;
     link.click();
+}
+if (typeof fabric === 'undefined') {
+    console.error('Fabric.js is not loaded');
+} else {
+    initializeWhiteboard();
 }

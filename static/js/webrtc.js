@@ -10,6 +10,22 @@ let isVideoOff = false;
 
 // Initialize WebRTC
 async function initializeWebRTC(username) {
+    // function initializeWebRTC() {
+    //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //       navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    //         .then(stream => {
+    //           // Use the stream (e.g., show video)
+    //           const videoElement = document.querySelector('video');
+    //           videoElement.srcObject = stream;
+    //         })
+    //         .catch(err => {
+    //           console.error("Error accessing media devices:", err);
+    //         });
+    //     } else {
+    //       console.error("getUserMedia not supported on this browser.");
+    //     }
+    //   }
+      
     try {
         // Get user media (camera and microphone)
         localStream = await navigator.mediaDevices.getUserMedia({
@@ -128,7 +144,9 @@ function addRemoteVideo(remotePeerUsername, stream) {
     videoElement.autoplay = true;
     videoElement.playsInline = true;
     videoElement.srcObject = stream;
-    
+    videoElement.play().catch(err => {
+    console.warn('Video playback was prevented:', err);
+});
     // Create username label
     const usernameLabel = document.createElement('div');
     usernameLabel.className = 'username-label';

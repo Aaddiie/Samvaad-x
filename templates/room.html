@@ -3,6 +3,11 @@
 {% block content %}
 <div class="main-container">
     <div id="meeting-room-container" class="meeting-container" data-username="{{ username }}" data-room-id="{{ room_id }}">
+        <!-- Meeting Link Section -->
+        <div class="meeting-link-container">
+            <p>Meeting Link: <a href="{{ url_for('room', room_id=room_id) }}" target="_blank">{{ url_for('room', room_id=room_id) }}</a></p>
+        </div>
+        
         <!-- Video Container -->
         <div class="video-container">
             <!-- Video Area -->
@@ -40,6 +45,10 @@
                         <button class="drawing-tool" data-tool="select" title="Select">
                             <i class="fas fa-mouse-pointer"></i>
                         </button>
+                        <button id="close-whiteboard-btn" title="Close Whiteboard" class="drawing-tool btn-danger" >
+                            <i class="fas fa-times"></i>
+                        </button>
+                        
                     </div>
                     
                     <div class="color-size-controls">
@@ -54,27 +63,27 @@
             
             <!-- Controls Bar -->
             <div class="controls-bar">
-                <button id="audio-btn" class="btn btn-primary" title="Mute/Unmute">
+                <button id="audio-btn" class="btn btn-primary" title="Mute/Unmute" style="min-width: 5%;">
                     <i class="fas fa-microphone"></i>
                 </button>
                 
-                <button id="video-btn" class="btn btn-primary" title="Start/Stop Video">
+                <button id="video-btn" class="btn btn-primary" title="Start/Stop Video" style="min-width: 9%;">
                     <i class="fas fa-video"></i>
                 </button>
                 
-                <button id="screen-share-btn" class="btn btn-primary" title="Share Screen">
-                    <i class="fas fa-desktop"></i> Share Screen
+                <button id="screen-share-btn" class="btn btn-primary" title="Share Screen" style="min-width: 11%;">
+                    <i class="fas fa-desktop"></i> Share <br>Screen
                 </button>
                 
-                <button id="whiteboard-btn" class="btn btn-primary" title="Show/Hide Whiteboard">
-                    <i class="fas fa-chalkboard"></i> Show Whiteboard
+                <button id="whiteboard-btn" class="btn btn-primary" title="Show/Hide Whiteboard"style="min-width: 12%;">
+                    <i class="fas fa-chalkboard"></i> Show <br> Whiteboard
                 </button>
                 
                 <button id="save-whiteboard-btn" class="btn btn-primary" title="Save Whiteboard">
                     <i class="fas fa-save"></i>
                 </button>
                 
-                <button id="record-btn" class="btn btn-primary" title="Start/Stop Recording">
+                <button id="record-btn" class="btn btn-primary" title="Start/Stop Recording" style="min-width: 11%;">
                     <i class="fas fa-record-vinyl"></i> Start Recording
                 </button>
                 

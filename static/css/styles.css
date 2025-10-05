@@ -3,15 +3,19 @@
  */
 
 /* Base Styles */
+
 body {
+    background-color: #0F172A;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+.NEW{
+    background-color: #1E293B;
+}
 /* Main Layout */
 .main-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
     overflow: hidden;
 }
 
@@ -229,7 +233,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #ffffff;
-    z-index: 10;
+    z-index: 1000;
     display: none;
 }
 
@@ -237,7 +241,7 @@ body {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    z-index: 15;
+    z-index: 1500;
     background-color: rgba(var(--bs-light-rgb), 0.8);
     border-radius: 8px;
     padding: 0.5rem;
@@ -251,7 +255,7 @@ body {
 }
 
 .drawing-tool {
-    width: 35px;
+    width: 60px;
     height: 35px;
     border-radius: 4px;
     display: flex;
